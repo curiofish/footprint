@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지구를 지키는 탄소 히어로!</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #2196F3;
+            --background-color: #E8F5E9;
+            --text-color: #333;
+            --accent-color: #FFC107;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            padding: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero-title {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            color: #FFF;
+        }
+
+        .mascot {
+            font-size: 4rem;
+            margin: 1rem 0;
+        }
+
+        .intro-section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .calculator-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .input-group:hover {
+            transform: translateY(-5px);
+        }
+
+        .input-group h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-icon {
+            font-size: 2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #E0E0E0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .input-help {
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+            margin: 2rem auto;
+            display: block;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        #result {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            margin-top: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .result-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
+            color: white;
+            border-radius: 50px;
+            margin: 1rem 0;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tips-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tip-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tip-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .achievement {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA000 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .achievement-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-container {
+            background-color: #E0E0E0;
+            border-radius: 50px;
+            height: 20px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            transition: width 1s ease;
+            border-radius: 50px;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 5px 10px;
+            border-radius: 6px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* SVG 스타일 추가 */
+        .hero-badge {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+        }
+
+        .category-icon {
+            width: 64px;
+            height: 64px;
+            margin: 10px;
+        }
+
+        .achievement-badge {
+            width: 80px;
+            height: 80px;
+            margin: 10px;
+        }
+
+        /* 애니메이션 효과 추가 */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        .hero-badge {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .mascot-character {
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* 캐릭터 말풍선 */
+        .speech-bubble {
+            position: relative;
+            background: #FFF;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border: 20px solid transparent;
+            border-top-color: #FFF;
+            border-bottom: 0;
+            margin-left: -20px;
+            margin-bottom: -20px;
+        }
+
+        /* 게임 요소 */
+        .eco-mission {
+            background: linear-gradient(135deg, #81C784 0%, #4CAF50 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .eco-mission:hover {
+            transform: translateY(-3px);
+        }
+
+        .star-points {
+            font-size: 1.2rem;
+            color: #FFD700;
+            text-shadow: 0 0 5px rgba(255,215,0,0.5);
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        /* 도움말 캐릭터 */
+        .helper-character {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            z-index: 1000;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* 새로운 입력 스타일 */
+        .input-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: #E0E0E0;
+            outline: none;
+            margin: 10px 0;
+        }
+
+        .input-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .input-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        /* 새로운 결과 표시 스타일 */
+        .result-character {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .result-character img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .character-message {
+            font-size: 1.2rem;
+            color: #333;
+            margin: 1rem 0;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <svg class="hero-badge" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="#4CAF50" />
+                <circle cx="50" cy="50" r="40" fill="#81C784" />
+                <path d="M50 20 L60 40 L80 40 L65 55 L70 75 L50 65 L30 75 L35 55 L20 40 L40 40 Z" fill="#FFC107" />
+                <circle cx="50" cy="50" r="15" fill="#2196F3" />
+            </svg>
+            <h1>지구를 지키는 탄소 히어로!</h1>
+            <p class="hero-title">우리의 작은 실천으로 지구를 지켜요!</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="intro-section">
+            <svg class="mascot-character" viewBox="0 0 200 200">
+                <!-- 귀여운 지구 캐릭터 -->
+                <circle cx="100" cy="100" r="90" fill="#81C784" />
+                <circle cx="100" cy="100" r="80" fill="#4CAF50" />
+                <circle cx="70" cy="80" r="15" fill="white" />
+                <circle cx="130" cy="80" r="15" fill="white" />
+                <circle cx="70" cy="80" r="7" fill="#333" />
+                <circle cx="130" cy="80" r="7" fill="#333" />
+                <path d="M70 120 Q100 140 130 120" stroke="white" stroke-width="5" fill="none" />
+            </svg>
+            <div class="speech-bubble">
+                <h2>안녕하세요, 꼬마 히어로! 👋</h2>
+                <p>저는 여러분의 친구 '지구맨'이에요! 오늘은 우리가 지구에 남기는 발자국에 대해 함께 알아볼까요?
+                   우리의 일상생활이 지구에 어떤 영향을 미치는지 재미있게 배워보아요!</p>
+            </div>
+            <div class="eco-mission">
+                <h3>🎯 오늘의 에코 미션</h3>
+                <p>분리수거 완벽하게 하기</p>
+                <div class="star-points">⭐ 획득 가능한 별점: 5개</div>
+            </div>
+        </section>
+
+        <div class="calculator-section">
+            <div class="input-group">
+                <h3>
+                    <svg class="category-icon" viewBox="0 0 64 64">
+                        <circle cx="32" cy="32" r="30" fill="#E8F5E9" />
+                        <path d="M20 32 L44 32 M44 32 L36 24 M44 32 L36 40" stroke="#4CAF50" stroke-width="4" fill="none" />
+                    </svg>
+                    이동하기
+                </h3>
+                <div class="input-wrapper">
+                    <label for="car">자동차 타고 간 거리 (km)</label>
+                    <input type="number" id="car" placeholder="예: 10km" min="0">
+                    <span class="input-help tooltip">❓
+                        <span class="tooltiptext">집에서 학교까지의 거리를 적어보세요!</span>
+                    </span>
+                </div>
+                
+                <div class="input-wrapper">
+                    <label for="publicTransport">버스/지하철 탄 거리 (km)</label>
+                    <input type="number" id="publicTransport" placeholder="예: 5km" min="0">
+                </div>
+                
+                <div class="input-wrapper">
+                    <label for="bicycle">자전거/걸어간 거리 (km)</label>
+                    <input type="number" id="bicycle" placeholder="예: 2km" min="0">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <h3>
+                    <svg class="category-icon" viewBox="0 0 64 64">
+                        <circle cx="32" cy="32" r="30" fill="#E8F5E9" />
+                        <path d="M24 24 C24 40 40 40 40 24" stroke="#4CAF50" stroke-width="4" fill="none" />
+                        <circle cx="32" cy="42" r="6" fill="#4CAF50" />
+                    </svg>
+                    먹기
+                </h3>
+                <div class="input-wrapper">
+                    <label for="meat">고기 먹은 횟수 (끼니)</label>
+                    <input type="number" id="meat" placeholder="예: 2끼" min="0">
+                </div>
+                
+                <div class="input-wrapper">
+                    <label for="dairy">우유/치즈 먹은 횟수 (회)</label>
+                    <input type="number" id="dairy" placeholder="예: 3회" min="0">
+                </div>
+                
+                <div class="input-wrapper">
+                    <label for="localFood">우리 동네 음식 먹기 (%)</label>
+                    <input type="number" id="localFood" placeholder="예: 60%" min="0" max="100">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <h3>
+                    <svg class="category-icon" viewBox="0 0 64 64">
+                        <circle cx="32" cy="32" r="30" fill="#E8F5E9" />
+                        <path d="M32 16 L32 48 M24 24 L40 24" stroke="#4CAF50" stroke-width="4" fill="none" />
+                        <circle cx="32" cy="32" r="4" fill="#FFC107" />
+                    </svg>
+                    에너지
+                </h3>
+                <div class="input-wrapper">
+                    <label for="electricity">전기 사용 시간 (시간)</label>
+                    <input type="number" id="electricity" placeholder="예: 5시간" min="0">
+                </div>
+                
+                <div class="input-wrapper">
+                    <label for="heating">난방 켠 시간 (시간)</label>
+                    <input type="number" id="heating" placeholder="예: 4시간" min="0">
+                </div>
+                
+                <div class="input-wrapper">
+                    <label for="aircon">에어컨 켠 시간 (시간)</label>
+                    <input type="number" id="aircon" placeholder="예: 3시간" min="0">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <h3>
+                    <svg class="category-icon" viewBox="0 0 64 64">
+                        <circle cx="32" cy="32" r="30" fill="#E8F5E9" />
+                        <path d="M24 32 C24 24 40 24 40 32 C40 40 24 40 24 32" stroke="#4CAF50" stroke-width="4" fill="none" />
+                        <path d="M32 16 L32 48" stroke="#4CAF50" stroke-width="4" fill="none" />
+                    </svg>
+                    생활
+                </h3>
+                <div class="input-wrapper">
+                    <label for="waste">일회용품 사용 (개)</label>
+                    <input type="number" id="waste" placeholder="예: 3개" min="0">
+                </div>
+                
+                <div class="input-wrapper">
+                    <label for="recycling">분리수거 실천 (%)</label>
+                    <input type="number" id="recycling" placeholder="예: 70%" min="0" max="100">
+                </div>
+                
+                <div class="input-wrapper">
+                    <label for="shower">샤워 시간 (분)</label>
+                    <input type="number" id="shower" placeholder="예: 15분" min="0">
+                </div>
+            </div>
+        </div>
+
+        <button onclick="calculateFootprint()" class="pulse">나의 탄소 발자국 확인하기! 🔍</button>
+
+        <div id="result"></div>
+
+        <!-- 도움말 캐릭터 -->
+        <svg class="helper-character" viewBox="0 0 100 100" onclick="showTip()">
+            <circle cx="50" cy="50" r="45" fill="#FFC107" />
+            <circle cx="35" cy="40" r="8" fill="white" />
+            <circle cx="65" cy="40" r="8" fill="white" />
+            <circle cx="35" cy="40" r="4" fill="#333" />
+            <circle cx="65" cy="40" r="4" fill="#333" />
+            <path d="M35 60 Q50 70 65 60" stroke="white" stroke-width="3" fill="none" />
+        </svg>
+    </div>
+
+    <script>
+        function showTip() {
+            const tips = [
+                "자전거를 타면 건강도 지키고 지구도 지킬 수 있어요!",
+                "사용하지 않는 전자기기의 플러그는 뽑아주세요!",
+                "음식은 먹을 만큼만 담아요!",
+                "양치할 때 물을 계속 틀어두지 말아요!",
+                "분리수거는 지구를 지키는 첫걸음이에요!"
+            ];
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            alert("💡 에코 꿀팁!\n\n" + randomTip);
+        }
+
+        function calculateFootprint() {
+            const emissions = {
+                car: 0.2,
+                publicTransport: 0.1,
+                bicycle: 0,
+                meat: 2.5,
+                dairy: 0.7,
+                electricity: 0.5,
+                heating: 0.3,
+                aircon: 0.4,
+                waste: 0.5,
+                shower: 0.1
+            };
+
+            const inputs = {
+                car: getInputValue('car'),
+                publicTransport: getInputValue('publicTransport'),
+                bicycle: getInputValue('bicycle'),
+                meat: getInputValue('meat'),
+                dairy: getInputValue('dairy'),
+                localFood: getInputValue('localFood'),
+                electricity: getInputValue('electricity'),
+                heating: getInputValue('heating'),
+                aircon: getInputValue('aircon'),
+                waste: getInputValue('waste'),
+                recycling: getInputValue('recycling'),
+                shower: getInputValue('shower')
+            };
+
+            const transport = (inputs.car * emissions.car) + 
+                            (inputs.publicTransport * emissions.publicTransport);
+            
+            const food = (inputs.meat * emissions.meat) + 
+                        (inputs.dairy * emissions.dairy) * 
+                        (1 - inputs.localFood/200);
+            
+            const energy = (inputs.electricity * emissions.electricity) +
+                          (inputs.heating * emissions.heating) +
+                          (inputs.aircon * emissions.aircon);
+            
+            const lifestyle = (inputs.waste * emissions.waste) * 
+                            (1 - inputs.recycling/200) +
+                            (inputs.shower * emissions.shower);
+
+            const totalEmission = transport + food + energy + lifestyle;
+            const percentage = (totalEmission/32)*100;
+
+            let heroLevel = "초보 히어로";
+            let heroEmoji = "🌱";
+            if (totalEmission < 8) {
+                heroLevel = "지구 수호자";
+                heroEmoji = "🌟";
+            } else if (totalEmission < 16) {
+                heroLevel = "에코 파이터";
+                heroEmoji = "💪";
+            }
+
+            let resultHTML = `
+                <h2>와우! 탄소 히어로 분석 결과</h2>
+                <div class="achievement">
+                    ${getHeroBadge(heroLevel)}
+                    <h3>${heroLevel}</h3>
+                    <div class="character-message">
+                        ${getCharacterMessage(totalEmission)}
+                    </div>
+                    <p>오늘의 탄소 발자국: <strong>${totalEmission.toFixed(1)} kg</strong></p>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: ${Math.min(percentage, 100)}%"></div>
+                </div>
+                <p>우리나라 평균(32kg)의 ${percentage.toFixed(1)}% 수준이에요!</p>
+                
+                <h3>나의 탄소 발자국 모아보기</h3>
+                <div class="tips-section">
+                    <div class="tip-card">
+                        <div class="tip-icon">🚗</div>
+                        <h4>이동하기</h4>
+                        <p>${transport.toFixed(1)} kg CO2</p>
+                        ${transport > 5 ? '<p>도전! 내일은 자전거나 대중교통을 이용해보아요!</p>' : '<p>잘하고 있어요! 계속 이렇게 해주세요!</p>'}
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🍽️</div>
+                        <h4>먹기</h4>
+                        <p>${food.toFixed(1)} kg CO2</p>
+                        ${food > 7 ? '<p>도전! 채소를 더 많이 먹어보아요!</p>' : '<p>훌륭해요! 건강한 식단을 유지하고 있네요!</p>'}
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">⚡</div>
+                        <h4>에너지</h4>
+                        <p>${energy.toFixed(1)} kg CO2</p>
+                        ${energy > 6 ? '<p>도전! 사용하지 않는 전자제품의 코드를 뽑아보아요!</p>' : '<p>대단해요! 에너지를 잘 아끼고 있어요!</p>'}
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">♻️</div>
+                        <h4>생활</h4>
+                        <p>${lifestyle.toFixed(1)} kg CO2</p>
+                        ${lifestyle > 4 ? '<p>도전! 일회용품 대신 다회용품을 사용해보아요!</p>' : '<p>멋져요! 친환경 생활을 실천하고 있네요!</p>'}
+                    </div>
+                </div>`;
+
+            document.getElementById('result').innerHTML = resultHTML;
+        }
+
+        function getInputValue(id) {
+            return parseFloat(document.getElementById(id).value) || 0;
+        }
+
+        function getHeroBadge(level) {
+            const badges = {
+                '초보 히어로': `<svg class="hero-badge" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="#81C784" />
+                    <path d="M50 20 L55 40 L75 40 L60 55 L65 75 L50 65 L35 75 L40 55 L25 40 L45 40 Z" fill="#C5E1A5" />
+                    <text x="50" y="55" text-anchor="middle" fill="#FFF" font-size="20">🌱</text>
+                </svg>`,
+                '에코 파이터': `<svg class="hero-badge" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="#4CAF50" />
+                    <path d="M50 20 L58 40 L78 40 L62 55 L68 75 L50 65 L32 75 L38 55 L22 40 L42 40 Z" fill="#FFC107" />
+                    <text x="50" y="55" text-anchor="middle" fill="#FFF" font-size="20">💪</text>
+                </svg>`,
+                '지구 수호자': `<svg class="hero-badge" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="#2196F3" />
+                    <path d="M50 20 L60 40 L80 40 L65 55 L70 75 L50 65 L30 75 L35 55 L20 40 L40 40 Z" fill="#FFD700" />
+                    <text x="50" y="55" text-anchor="middle" fill="#FFF" font-size="20">🌟</text>
+                </svg>`
+            };
+            return badges[level] || badges['초보 히어로'];
+        }
+
+        function getCharacterMessage(emission) {
+            if (emission < 8) {
+                return "와우! 정말 대단해요! 당신은 진정한 지구 수호자예요! 🌟";
+            } else if (emission < 16) {
+                return "잘하고 있어요! 조금만 더 노력하면 지구 수호자가 될 수 있어요! 💪";
+            } else {
+                return "걱정마세요! 우리 함께 조금씩 실천해보아요! 🌱";
+            }
+        }
+    </script>
+</body>
+</html>
